@@ -39,5 +39,7 @@
 	<false/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
+	<key>CFBundleName</key>
+	<string>Todo</string>
 </dict>
 </plist>

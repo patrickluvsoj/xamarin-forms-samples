@@ -14,13 +14,11 @@ namespace TodoPCLTests
 		{
 		}
 
-
 		//override BeforeEastTest method from BaseTest class
-		//public override void BeforeEachTest()
-		//{
-		//	base.BeforeEachTest();
-		//}
-
+		public override void BeforeEachTest()
+		{
+			base.BeforeEachTest();
+		}
 
 		[Test]
 		public void Repl()

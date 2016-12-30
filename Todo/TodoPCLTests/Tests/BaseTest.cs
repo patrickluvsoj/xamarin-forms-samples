@@ -34,6 +34,31 @@ namespace TodoPCLTests
 			ListPage = new ListPage(app, platform);
 
 			//add items after app initializes
+			ListPage.TapAddButton();
+			ItemPage.FillName("Cucumber");
+			app.Screenshot("Entered Cucumber");
+			ItemPage.FillNote("Calabash");
+			app.Screenshot("Entered Calabash");
+			ItemPage.SaveTodo();
+			app.Screenshot("Item saved");
+
+			ListPage.TapAddButton();
+			ItemPage.FillName("Ruby");
+			app.Screenshot("Entered Ruby");
+			ItemPage.FillNote("Rails");
+			app.Screenshot("Entered Rails");
+			ItemPage.ToggleSwitch();
+			ItemPage.SaveTodo();
+			app.Screenshot("Item saved");
+
+			ListPage.TapAddButton();
+			ItemPage.FillName("Python");
+			app.Screenshot("Entered Python");
+			ItemPage.FillNote("Django");
+			app.Screenshot("Entered Django");
+			ItemPage.ToggleSwitch();
+			ItemPage.SaveTodo();
+			app.Screenshot("Item saved");
 		}
 	}
 }

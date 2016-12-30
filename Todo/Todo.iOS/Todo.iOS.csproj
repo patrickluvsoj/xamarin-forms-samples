@@ -53,6 +53,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <IpaPackageName></IpaPackageName>
     <AssemblyName>QuickTodoiOS</AssemblyName>
+    <CodesignProvision>d9edaff6-d99e-4cc0-b3bf-17136d866e69</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>

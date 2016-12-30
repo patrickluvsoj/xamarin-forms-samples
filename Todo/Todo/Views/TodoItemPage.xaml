@@ -7,9 +7,9 @@
 		<Entry Text="{Binding Notes}" AutomationId="NotesField"/>
 		<Label Text="Done" />
 		<Switch IsToggled="{Binding Done}" AutomationId="Switch"/>
-		<Button Text="Save" Clicked="OnSaveClicked" />
-		<Button Text="Delete" Clicked="OnDeleteClicked" />
-		<Button Text="Cancel" Clicked="OnCancelClicked" />
-		<Button Text="Speak" Clicked="OnSpeakClicked" />
+		<Button Text="Save" AutomationId="Save" Clicked="OnSaveClicked" />
+		<Button Text="Delete" AutomationId="Delete" Clicked="OnDeleteClicked" />
+		<Button Text="Cancel" AutomationId="Cancel" Clicked="OnCancelClicked" />
+		<Button Text="Speak" AutomationId="Speak" Clicked="OnSpeakClicked" />
 	</StackLayout>
 </ContentPage>
