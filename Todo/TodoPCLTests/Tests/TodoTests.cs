@@ -44,7 +44,6 @@ namespace TodoPCLTests
 			ItemPage.FillName("C#");
 			ItemPage.FillNote(".Net");
 			ItemPage.ToggleSwitch();
-			app.Screenshot("Filled todo item form");
 
 			ItemPage.SaveTodo();
 
@@ -63,7 +62,6 @@ namespace TodoPCLTests
 			ItemPage.FillName("Javascript");
 			ItemPage.FillNote("AngularJS");
 			ItemPage.ToggleSwitch();
-			app.Screenshot("Filled todo item form");
 
 			ItemPage.CancelTodo();
 
@@ -78,28 +76,28 @@ namespace TodoPCLTests
 			Query expectedname = x => x.Marked("Ruby");
 
 			//act
-			ListPage.TaponSecondItem();
-			app.WaitForElement(x => x.Class("UITextField"));
+			ListPage.TapOnListItem(2);
 
 			//assert ====> need to know how to get text from txt entry field
 			app.WaitForElement(expectedname, "Timed out waiting for name Ruby");
-			//var actualname = ItemPage.GetTitle();
-			//Assert.AreEqual(expectedname)
-
 		}
 
 		[Test]
 		public void MarkFirstItemDone()
 		{
 			//arrange
+			//var initialNumberOfDoneItems = ListPage.NumberOfDoneItems;
+
 			//verify switch is not enabled
-			ListPage.TaponFirstItem();
+			ListPage.TapOnListItem(1);
 
 			//act
 			ItemPage.ToggleSwitch();
-			app.Screenshot("Toggled Switch");
-
 			ItemPage.SaveTodo();
+
+			//Assert
+			//var finalNumberOfDoneItems = ListPage.NumberOfDoneItems;
+			//Assert.Greater(finalNumberOfDoneItems, initialNumberOfDoneItems);
 		}
 
 		[Test]

@@ -14,35 +14,32 @@ namespace Todo
 			database.CreateTableAsync<TodoItem>().Wait();
 		}
 
-		public Task<List<TodoItem>> GetItemsAsync()
+		public async Task<List<TodoItem>> GetItemsAsync()
 		{
-			return database.Table<TodoItem>().ToListAsync();
+			return await database.Table<TodoItem>().ToListAsync();
 		}
 
-		public Task<List<TodoItem>> GetItemsNotDoneAsync()
+		public async Task<List<TodoItem>> GetItemsNotDoneAsync()
 		{
-			return database.QueryAsync<TodoItem>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
+			return await database.Table<TodoItem>()?.Where(x => x.Done == true)?.ToListAsync();
 		}
 
-		public Task<TodoItem> GetItemAsync(int id)
+		public async Task<TodoItem> GetItemAsync(int id)
 		{
-			return database.Table<TodoItem>().Where(i => i.ID == id).FirstOrDefaultAsync();
+			return await database.Table<TodoItem>()?.Where(i => i.ID == id)?.FirstOrDefaultAsync();
 		}
 
-		public Task<int> SaveItemAsync(TodoItem item)
+		public async Task<int> SaveItemAsync(TodoItem item)
 		{
 			if (item.ID != 0)
-			{
-				return database.UpdateAsync(item);
-			}
-			else {
-				return database.InsertAsync(item);
-			}
+				return await database.UpdateAsync(item);
+
+			return await database.InsertAsync(item);
 		}
 
-		public Task<int> DeleteItemAsync(TodoItem item)
+		public async Task<int> DeleteItemAsync(TodoItem item)
 		{
-			return database.DeleteAsync(item);
+			return await database.DeleteAsync(item);
 		}
 	}
 }

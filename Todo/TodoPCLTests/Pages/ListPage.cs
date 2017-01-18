@@ -2,6 +2,8 @@
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 using Query = System.Func<Xamarin.UITest.Queries.AppQuery, Xamarin.UITest.Queries.AppQuery>;
+using Xamarin.UITest.iOS;
+using Xamarin.UITest.Android;
 
 
 namespace TodoPCLTests
@@ -17,38 +19,44 @@ namespace TodoPCLTests
 		//Constructor
 		public ListPage(IApp app, Platform platform) : base(app, platform)
 		{
-			AddButton = x => x.Marked("Add");
-			Ruby = x => x.Marked("Ruby");
+			if (app is iOSApp)
+				AddButton = x => x.Marked("Add");
+			else
+				AddButton = x => x.Marked("NoResourceEntry-0");
+
 			Python = x => x.Marked("Python");
-			CSharp = x => x.Marked("C#");
 		}
+
+		//Assigning to property Number of done items
+		public int NumberOfDoneItems => (int)app.Query("check.png")?.Length;
+
 
 		public void TapAddButton()
 		{
-			app.WaitForElement(x => x.Class("UITableView"), 
-			                   "Timed out waiting for todo list to load");
+			app.WaitForElement(AddButton, "Timed out waiting for todo list to load");
 			app.Tap(AddButton);
+
+			app.WaitForElement(x => x.Marked("NameField"), "Timed out waiting to navigate to todo item page");
 			app.Screenshot("Navigated to ItemPage");
-			app.WaitForElement(x => x.Class("UITextField"), 
-			                   "Timed out waiting to navigate to todo item page");
+		}
+
+
+		public void TapOnListItem(int itemNumber)
+		{
+			//find class that is in listview
+			if (app is AndroidApp)
+				app.Tap(x => x.Class("ViewCellRenderer_ViewCellContainer").Index(itemNumber - 1));
+			else
+				app.Tap(x => x.Marked("ListViewItem").Index(itemNumber - 1));
+
+			app.WaitForElement(x => x.Marked("NameField"));
+			app.Screenshot($"Tapped On Item Number: {itemNumber}");
 		}
 
 		public void TapOnPython()
 		{
 			app.Tap(Python);
 			app.Screenshot("Navigated to Python item");
-		}
-
-		public void TaponFirstItem()
-		{
-			app.Tap(x => x.Class("UILabel").Index(0));
-			app.Screenshot("Navigated to item page");
-		}
-
-		public void TaponSecondItem()
-		{
-			app.Tap(x => x.Class("UILabel").Index(1));
-			app.Screenshot("Navigated to item page");
 		}
 	}
 }

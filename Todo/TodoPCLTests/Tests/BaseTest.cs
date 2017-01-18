@@ -11,20 +11,24 @@ namespace TodoPCLTests
 		protected IApp app;
 		protected Platform platform;
 
+		//Initialize page object variables
 		protected ItemPage ItemPage;
 		protected ListPage ListPage;
 
-		//Constructor for this class. Assigning platform variable to object c# this
+
+		//Constructor for this class. Assigning platform variable to this object
 		protected BaseTest(Platform platform)
 		{
 			this.platform = platform;
 		}
 
 
+		//Setup method will always execute before any tests run
 		[SetUp]
 		public virtual void BeforeEachTest()
 		{
-			//Initialize app by calling StartpApp method from AppInitializer class
+			//AppInitializer class and its method StartApp are custom methods 
+			//to abstract the initialization of tests which returns object app
 			//Passing platform as variable to determine which platform to start the test
 			app = AppInitializer.StartApp(platform);
 			app.Screenshot("App initialized");
@@ -33,32 +37,13 @@ namespace TodoPCLTests
 			ItemPage = new ItemPage(app, platform);
 			ListPage = new ListPage(app, platform);
 
-			//add items after app initializes
-			ListPage.TapAddButton();
-			ItemPage.FillName("Cucumber");
-			app.Screenshot("Entered Cucumber");
-			ItemPage.FillNote("Calabash");
-			app.Screenshot("Entered Calabash");
-			ItemPage.SaveTodo();
-			app.Screenshot("Item saved");
+			//Backdoor method helps pre-populate the app's database with task items
+			BackdoorHelpers.PopulateDummyData(app);
 
+			//Operation to sync databse with ListView
 			ListPage.TapAddButton();
-			ItemPage.FillName("Ruby");
-			app.Screenshot("Entered Ruby");
-			ItemPage.FillNote("Rails");
-			app.Screenshot("Entered Rails");
-			ItemPage.ToggleSwitch();
-			ItemPage.SaveTodo();
-			app.Screenshot("Item saved");
-
-			ListPage.TapAddButton();
-			ItemPage.FillName("Python");
-			app.Screenshot("Entered Python");
-			ItemPage.FillNote("Django");
-			app.Screenshot("Entered Django");
-			ItemPage.ToggleSwitch();
-			ItemPage.SaveTodo();
-			app.Screenshot("Item saved");
+			ItemPage.CancelTodo();
 		}
+
 	}
 }

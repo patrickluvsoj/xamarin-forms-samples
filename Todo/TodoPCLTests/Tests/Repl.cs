@@ -20,6 +20,8 @@ namespace TodoPCLTests
 			base.BeforeEachTest();
 		}
 
+		//Repl allows you to interact with command line 
+		//to navigate app's UI elements and create new test scripts
 		[Test]
 		public void Repl()
 		{

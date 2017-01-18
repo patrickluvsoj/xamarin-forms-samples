@@ -41,6 +41,7 @@
     <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Tests\TodoTests.cs" />
+    <Compile Include="Helpers\BackdoorHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -62,6 +63,7 @@
   <ItemGroup>
     <Folder Include="Pages\" />
     <Folder Include="Tests\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

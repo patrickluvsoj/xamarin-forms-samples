@@ -30,42 +30,33 @@ namespace TodoPCLTests
 			DoneSwitch = x => x.Marked("Switch");
 		}
 
-
 		/*All interactions available on this page listed bellow*/
 
-		//ItemPage.FillName(name);
 		public void FillName(string name)
 		{
-			//add step to verify that field is empty. If not empty, clear text.
-			//if
-			//{ 
-			//	app.ClearText(NameField);
-			//}
 			app.EnterText(NameField, name);
+			app.Screenshot($"Entered {name}");
 		}
 
 		public void ClearNameText()
 		{
 			app.ClearText(NameField);
+			app.Screenshot("Cleared Text");
 		}
 
-
-		//ItemPage.FillNote(note);
 		public void FillNote(string note)
 		{
-			//add step to verify that field is empty. If not empty, clear text.
 			app.EnterText(NotesField, note);
+			app.Screenshot($"Entered {note}");
 		}
 
-
-		//ItemPage.ToggleSwitch(isdone);
 		public void ToggleSwitch()
 		{
 			//add step to verify that switch is toggle to note done
 			app.Tap(DoneSwitch);
+			app.Screenshot("Toggled Switch");
 		}
 
-		//ItemPage.SaveTodo;
 		public void SaveTodo()
 		{
 			app.Tap(SaveButton);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Todo
@@ -9,6 +10,10 @@ namespace Todo
 		public TodoListPage()
 		{
 			InitializeComponent();
+		}
+
+		public void RefreshData()
+		{
 		}
 
 		protected override async void OnAppearing()

@@ -2,6 +2,9 @@
 using Android.OS;
 using Android.Content.PM;
 
+using Java.Interop;
+
+
 namespace Todo
 {
 	[Activity(Label = "Todo", Icon = "@drawable/icon", MainLauncher = true,
@@ -17,5 +20,17 @@ namespace Todo
 
 			LoadApplication(new App());
 		}
+
+		#region Xamarin Test Cloud Backdoors
+		#if DEBUG
+
+		[Export("PopulateDummyData")]
+		public void PopulateDummyData()
+		{
+			BackdoorHelpers.AddDummyDataToDatabase();
+		}
+
+		#endif
+		#endregion
 	}
 }
